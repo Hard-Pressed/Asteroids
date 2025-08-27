@@ -18,6 +18,9 @@ def main():
 
     player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
+    updatable_objects = pygame.sprite.Group(player)
+    drawable_objects = pygame.sprite.Group(player)
+
     global dt
     # Main game loop
     running = True
@@ -28,13 +31,16 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        player.update(dt)
+        
+        # Update all objects
+        updatable_objects.update(dt)
 
         # Black screen
         screen.fill((0, 0, 0))
 
-        # Draw player
-        player.draw(screen)
+        # Draw all objects
+        for drawable in drawable_objects:
+            drawable.draw(screen)
 
         pygame.display.flip()
 
