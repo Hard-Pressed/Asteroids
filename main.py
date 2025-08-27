@@ -1,4 +1,5 @@
 import pygame
+from asteroid import Asteroid
 from player import Player
 
 pygame.init()
@@ -20,7 +21,12 @@ def main():
 
     updatable_objects = pygame.sprite.Group(player)
     drawable_objects = pygame.sprite.Group(player)
-
+    asteroid_objects = pygame.sprite.Group()
+    
+    Asteroid.asteroids = asteroid_objects
+    Asteroid.updatables = updatable_objects
+    Asteroid.drawables = drawable_objects
+    
     global dt
     # Main game loop
     running = True
