@@ -1,6 +1,8 @@
 import pygame
 from asteroid import Asteroid
 from player import Player
+import asteroidfield
+
 
 pygame.init()
 
@@ -26,7 +28,12 @@ def main():
     Asteroid.asteroids = asteroid_objects
     Asteroid.updatables = updatable_objects
     Asteroid.drawables = drawable_objects
-    
+
+    asteroidfield.AsteroidField.containers = updatable_objects
+    asteroidfield.updatables = updatable_objects
+
+    asteroid_field = asteroidfield.AsteroidField()
+
     global dt
     # Main game loop
     running = True
