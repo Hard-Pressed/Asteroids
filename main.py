@@ -1,4 +1,5 @@
 import pygame
+from player import Player
 
 pygame.init()
 
@@ -15,6 +16,8 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
+    player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+
     global dt
     # Main game loop
     running = True
@@ -28,7 +31,13 @@ def main():
 
         # Black screen
         screen.fill((0, 0, 0))
+
+        # Draw player
+        player.draw(screen)
+
         pygame.display.flip()
+
+    
 
     pygame.quit()
 
