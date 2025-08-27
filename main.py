@@ -21,17 +21,22 @@ def main():
 
     player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
+    # Create sprite groups
     updatable_objects = pygame.sprite.Group(player)
     drawable_objects = pygame.sprite.Group(player)
     asteroid_objects = pygame.sprite.Group()
     
+    # Set up containers for Asteroid class
     Asteroid.asteroids = asteroid_objects
     Asteroid.updatables = updatable_objects
     Asteroid.drawables = drawable_objects
 
+    # Set up containers for AsteroidField class
     asteroidfield.AsteroidField.containers = updatable_objects
-    asteroidfield.updatables = updatable_objects
+    asteroidfield.asteroidfield_updatables = updatable_objects
+    asteroidfield.Asteroid.containers = [asteroid_objects, updatable_objects, drawable_objects]
 
+    # Create asteroid field after containers are set
     asteroid_field = asteroidfield.AsteroidField()
 
     global dt
@@ -47,6 +52,14 @@ def main():
         
         # Update all objects
         updatable_objects.update(dt)
+
+        # Check collisions
+            
+        for asteroid in asteroid_objects:
+            if player.collides_with(asteroid):
+                print("Game over!")
+                pygame.quit()
+                return
 
         # Black screen
         screen.fill((0, 0, 0))
