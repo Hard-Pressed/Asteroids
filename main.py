@@ -18,6 +18,7 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
+    # Player object
     player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
     # Create sprite groups
@@ -63,6 +64,11 @@ def main():
                 print("Game over!")
                 pygame.quit()
                 return
+            for shot in shot_objects:
+                    if shot.collides_with(asteroid):
+                        shot.kill()
+                        asteroid.split()
+                        break
 
         # Black screen
         screen.fill((0, 0, 0))
